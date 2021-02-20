@@ -1,0 +1,15 @@
+
+version: "2.1"
+
+services:
+  php:
+    extends:
+        file: docker-compose.php.yml
+        service: php
+   
+  nginx:
+    extends:
+        file: docker-compose.nginx.yml
+        service: nginx
+    
+      

@@ -1,0 +1,11 @@
+version: "2.1"
+
+services: 
+  php:
+    image: php:7.3-fpm
+    container_name: demo-2
+    volumes: 
+      - ./site/:/var/www/myapp
+    working_dir: /var/www/myapp
+    ports: 
+      - 8081:9000

@@ -1,0 +1,11 @@
+version: "2.1"
+
+services:
+  nginx:
+    image: nginx:1.19
+    volumes:
+      - ./docker/nginx/:/etc/nginx/conf.d/
+      - ./site/:/var/www/myapp
+    ports: 
+      - 8081:80
+    working_dir: /var/www/myapp
