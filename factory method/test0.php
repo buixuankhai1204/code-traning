@@ -7,7 +7,6 @@ abstract Class Logistics{
         $item=$this->createTransport();
         $item->Deliver();
     }
-
 }
 class RoadLogictics extends Logistics{
     public function createTransport():TranSport{
@@ -24,7 +23,7 @@ interface TranSport{
 }
 Class Truck implements TranSport{
     public function Deliver():String{
-        return"nvan chuyen duong bo";
+        return"van chuyen duong bo";
     }
 }
 Class Ship implements TranSport{

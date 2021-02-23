@@ -27,7 +27,7 @@ class Singleton{
 class Logger extends Singleton{
     public function timeDateText(String $text){
         $date = date('Y-m-d');
-        echo $date;
+        echo $date; 
         echo $date."\t".$text."\n";
     }
     public static function log(String $text):void{

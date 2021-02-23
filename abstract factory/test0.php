@@ -7,7 +7,6 @@ interface FurnitureFactory{
 
      function createChair():AbstractChair;
      function createCoffeeTable():AbstractCoffeeTable;
-     function createSofa():Sofa;
 }
 Class VictorianFunitureFactory implements FurnitureFactory{
     public function createChair():AbstractChair{
@@ -17,9 +16,7 @@ Class VictorianFunitureFactory implements FurnitureFactory{
         return new VictorianCoffeeTable();
 
     }
-    public function createSofa():Sofa{
-        return new VictorianSofa();
-    }
+    
 }
 Class ModernFunitureFactory implements FurnitureFactory{
     public function createChair():AbstractChair{
@@ -29,9 +26,7 @@ Class ModernFunitureFactory implements FurnitureFactory{
         return new ModernCoffeeTable();
 
     }
-    public function createSofa():Sofa{
-        return new ModernSofa();
-    }
+   
 }
 interface AbstractChair{
     function hasLegs();
@@ -97,13 +92,12 @@ class ModernSofa implements AbstractSofa{
 function ClientCode(FurnitureFactory $factory){
     $chair=$factory->createChair();
     $CoffeeTable=$factory->createCoffeeTable();
-    echo $chair->putOn() . "\n";
-    echo $CoffeeTable->putOn() . "\n";
+    echo $chair->putOn() . "";
+    echo $CoffeeTable->putOn() . "";
 }
-echo "Client: Testing client code with the first factory type:\n";
+echo "Client: Testing client code with the first factory type:";
 ClientCode(new VictorianFunitureFactory());
 
-echo "\n";
 
-echo "Client: Testing the same client code with the second factory type:\n";
+echo "Client: Testing the same client code with the second factory type:";
 ClientCode(new ModernFunitureFactory());
