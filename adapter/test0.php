@@ -1,89 +1,88 @@
-<?php
+<?php 
 
-namespace RefactoringGuru\Adapter\RealWorld;
 
-interface Notification
-{
-    public function send(string $title, string $message);
-}
 
-class EmailNotification implements Notification
-{
-    private $adminEmail;
-
-    public function __construct(string $adminEmail)
-    {
-        $this->adminEmail = $adminEmail;
+    interface MediaPlayer{
+        function play($audio_type,$name);
     }
 
-    public function send(string $title, string $message): void
-    {
-        mail($this->adminEmail, $title, $message);
-        echo "Sent email with title '$title' to '{$this->adminEmail}' that says '$message'.";
+    class AudioPlayer implements MediaPlayer{
+        public $audioPlayer;
+        
+        
+        public function play($audio_type,$name){
+            if($audio_type=="mp3"){
+                echo"Playing mp3 file. Name:" . $name;
+            }elseif($audio_type=="vlc"||$audio_type=="mp4"){
+                $this->audioPlayer=new MediaAdapter($audio_type);
+                $this->audioPlayer->play($audio_type,$name);
+                
+            }else{
+                 echo "invaid media ".$audio_type ."format not support";
+            }
+        }
     }
-}
-
-class SlackApi
-{
-    private $login;
-    private $apiKey;
-
-    public function __construct(string $login, string $apiKey)
-    {
-        $this->login = $login;
-        $this->apiKey = $apiKey;
-    }
-
-    public function logIn(): void
-    {
-
-        echo "Logged in to a slack account '{$this->login}'.\n";
-    }
-
-    public function sendMessage(string $chatId, string $message): void
-    {
-
-        echo "Posted following message into the '$chatId' chat: '$message'.\n";
-    }
-}
-
-class SlackNotification implements Notification
-{
-    private $slack;
-    private $chatId;
-
-    public function __construct(SlackApi $slack, string $chatId)
-    {
-        $this->slack = $slack;
-        $this->chatId = $chatId;
+    class MediaAdapter implements MediaPlayer{
+        private advancedMediaPlayer $mediaAdapter;
+        public function MediaAdapter($type){
+            if($type=="vlc"){
+                $this->mediaAdapter=new VLCplayer();
+            }elseif($type=="mp4"){
+                $this->mediaAdapter= new MP4player();
+            }else{
+            }
+        }
+        public function play($audio_type,$name){
+            if($audio_type=="vlc"){
+                $this->mediaAdapter->playVLC($name);
+            }elseif($audio_type=="mp4"){
+                $this->mediaAdapter->playMP4($name);
+            }
+        }
     }
 
-    public function send(string $title, string $message): void
-    {
-        $slackMessage = "#" . $title . "# " . strip_tags($message);
-        $this->slack->logIn();
-        $this->slack->sendMessage($this->chatId, $slackMessage);
+    interface advancedMediaPlayer{
+        function playVLC($name);
+        function playMP4($name);
     }
-}
 
-function clientCode(Notification $notification)
-{
+    class VLCplayer implements advancedMediaPlayer{
 
 
-    echo $notification->send("Website is down!",
-        "<strong style='color:red;font-size: 50px;'>Alert!</strong> " .
-        "Our website is not responding. Call admins and bring it up!");
+        public function playVLC($name)
+        {
+            echo"Playing vlc file. Name: ".$name;
+        }
+        
+        public function playMP4($name)
+        {
+            //
+        }
+    }
+
+    class MP4player implements advancedMediaPlayer{
+
+        public function playVLC($name)
+        {
+            
+        }
+
+        public function playMP4($name)
+        {
+           echo "Playing vlc file. Name: ".$name; 
+        }
+    }
 
 
-}
+     $audioPlayer = new AudioPlayer();
 
-echo "Client code is designed correctly and works with email notifications:\n";
-$notification = new EmailNotification("developers@example.com");
-clientCode($notification);
-echo "\n\n";
+      $audioPlayer->play("mp3", "beyond the horizon.mp3");
+      $audioPlayer->play("mp4", "alone.mp4");
+      $audioPlayer->play("vlc", "far far away.vlc");
+      $audioPlayer->play("avi", "mind me.avi");
 
 
-echo "The same client code can work with other classes via adapter:\n";
-$slackApi = new SlackApi("example.com", "XXXXXXXX");
-$notification = new SlackNotification($slackApi, "Example.com Developers");
-clientCode($notification);
+    
+
+
+

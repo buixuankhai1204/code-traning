@@ -40,7 +40,7 @@ class ConcreteBuilder2 implements builder{
 
     private $product;
 
-    public function __construct()
+    public function __constructor()
     {
         $this->reset();
     }

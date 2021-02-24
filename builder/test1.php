@@ -48,15 +48,11 @@
 
 
     class manager {
-        public $scout;
-        public $type;
-        
+        public $scout;        
         public function getBuild(scout $scout){
             $this->scout=$scout;
         }
-        public function getType(ScoutMen $ScoutMen){
-            $this->type=$ScoutMen;
-        }
+        
         public function buildHeath(){
             $this->scout->health();
         }
