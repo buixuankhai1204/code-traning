@@ -1,0 +1,11 @@
+version: "2.1"
+services:
+  php:
+    image: php:7.3-fpm
+    volumes: 
+      - ./site/:/var/www/myapp
+    container_name: hihi
+    working_dir: /var/www/myapp
+    command: bash -c "php-fpm"
+    ports: 
+      - 9002:9000

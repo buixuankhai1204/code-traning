@@ -1,0 +1,106 @@
+body{
+    margin: 0px;
+}
+.container{
+    width: 1140px;
+    margin :0px auto;
+    
+}
+img{
+    height:auto;
+}
+.border{
+    border: 1px solid #58D3F7;
+}
+.border-b{
+    border-bottom: 1px solid #58D3F7;
+}
+header,img{
+    width: 100%;
+}
+header .bg-menu{
+    background-color: #886A08;
+}
+header .menu{
+    width: 61%;
+    color: white;
+
+}
+header .flex{
+    display: flex;
+    justify-content: space-between;
+}
+header .flex .flexItem{
+    display: inline-block;
+    padding: 10px;
+}
+header .flex .flexItem:hover{
+    background-color: black;
+}
+header .bannner{
+    position: relative;
+}
+header .banner .textBanner{
+    position: absolute;
+    width: 50%;
+    top: 20%;
+    left: 20%;
+}
+header .banner .titleBanner{
+color: chocolate;
+font-size: 30px;
+
+}
+header .banner .textSmallBanner{
+    margin-top: 20px;
+}
+
+#body{
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+#body #sideBarLeft{
+    flex-basis: 30%;
+    margin-right: 25px;
+    text-align: center;
+
+}
+#body #content{
+    flex-basis: 70%;
+}
+#body #sideBarLeft .newPost{
+    margin-top: 30px;
+
+}
+#content form input{
+    width: 79%;
+    border: 2px solid #4CAF50;  
+    padding: 10px 0px 10px 0px;
+}
+#content form button{
+    width: 19%;
+    background-color: white;
+  color: black;
+  border: 2px solid #4CAF50; /* Green */
+  padding: 10px 0px 10px 0px;
+
+}
+#content .toDoList{
+    margin-top: 20px;
+}
+#content .listItem{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+#content .listItem p,#content .listItem .active,#content .listItem .delete{
+    border-right: 1px solid #4CAF50;
+    margin: 0px;
+    padding: 16px 10px;
+}
+#content .listItem .delete,#content .listItem .active{
+    padding: 16px 10px;
+}
+

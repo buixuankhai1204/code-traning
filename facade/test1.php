@@ -8,7 +8,8 @@
 
         function __construct(
         Payfacade $pay=null, 
-        HistoryCall $historyCall=null)
+        HistoryCall $historyCall=null
+        )
         {
             $this->pay = $pay ?: new Payfacade();
             $this->historyCall = $historyCall ?: new HistoryCall();
@@ -23,6 +24,8 @@
 
             if($this->pay==new Payfacade())
             $this->pay->VinaPay();
+            $this->historyCall->timeCall();
+                $this->historyCall->dateCall();
         }
     }
 

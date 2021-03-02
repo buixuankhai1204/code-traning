@@ -34,7 +34,7 @@
     }
 
         public function writeData(){
-            // return $this->wrappee->writeData();
+            return $this->wrappee->writeData();
 
         }
             
@@ -66,7 +66,7 @@
 
         public function  writeData()
         {
-            echo "CompresstionDecorator(".parent::writeData().")";
+            return "CompresstionDecorator(".parent::writeData().")";
             
         }
 
@@ -79,7 +79,7 @@
     }
 
     function clientCode(DataSource $file){
-        echo"result".$file->writeData("ss");
+        return "result".$file->writeData("ss");
     }
 
 
