@@ -9,7 +9,10 @@
 </head>
 
 <body>
+
+
     <div id="wrapper">
+    <p id="demo"></p>
         <header>
             <div class="bg-menu">
                 <div class="menu flex container ">
@@ -71,40 +74,52 @@
                 <div class="toDoList">
                     <div class="listItem border">
                         <div class="TitleToDo">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, ad?</p>
+                            <p class="demo"></p>
                         </div>
-                        <div class="active">done</div>
-                        <div class="delete">xoa</div>
+                        <button class="active">done</button>
+                        <button class="delete">delete</button>
                     </div>
                     <div class="listItem border">
                         <div class="TitleToDo">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, ad?</p>
+                            <p class="demo"></p>
                         </div>
-                        <div class="active">done</div>
-                        <div class="delete">xoa</div>
+                        <button class="active">done</button>
+                        <button class="delete">delete</button>
                     </div>
                     <div class="listItem border">
                         <div class="TitleToDo">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, ad?</p>
+                            <p class="demo"></p>
                         </div>
-                        <div class="active">done</div>
-                        <div class="delete">xoa</div>
+                        <button class="active">done</button>
+                        <button class="delete">delete</button>
                     </div>
                     <div class="listItem border">
                         <div class="TitleToDo">
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, ad?</p>
+                            <p class="demo"></p>
                         </div>
-                        <div class="active">done</div>
-                        <div class="delete">xoa</div>
+                        <button class="active">done</button>
+                        <button class="delete">delete</button>
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+<script>
+ fetch('https://jsonplaceholder.typicode.com/posts')
+  .then((response) => response.json())
+  .then((json) => myFunction(json));
+  function myFunction(arr){
+     text="";
+    for (i = 0; i < arr.length; i++) {
+  text = arr[i].title + "<br>";
+  document.getElementsByClassName("demo")[i].innerHTML=text;
+}
 
-
-
+ }
+ 
+</script>
+   
 </body>
 
 </html>
