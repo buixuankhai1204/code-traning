@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
+
 <body>
-
-
     <div id="wrapper">
-    <p id="demo"></p>
+        <p id="demo"></p>
         <header>
             <div class="bg-menu">
                 <div class="menu flex container ">
@@ -31,9 +30,7 @@
                     <div class="textSmallBanner">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus optio non veritatis velit natus sint et, suscipit totam fugit fuga doloremque, rem, ratione deleniti voluptates quis mollitia maxime maiores ab!</div>
                 </div>
             </div>
-
         </header>
-
         <div id="body">
             <div id="sideBarLeft">
                 <div class="category border">
@@ -60,66 +57,57 @@
                         <p>-bai viet 2</p>
                         <p>-bai viet 3</p>
                     </div>
-
                 </div>
-
             </div>
             <div id="content">
                 <div class="form">
-                    <form action="">
-                        <input type="text" name="API" placeholder="nhap vao day">
+                    <form action="http://localhost:8081/" method="POST">
+                        <input id="test" type="text" name="API" placeholder="nhap vao day">
                         <button type="submit" name="submit">submit</button>
                     </form>
                 </div>
                 <div class="toDoList">
-                    <div class="listItem border">
-                        <div class="TitleToDo">
-                            <p class="demo"></p>
-                        </div>
-                        <button class="active">done</button>
-                        <button class="delete">delete</button>
-                    </div>
-                    <div class="listItem border">
-                        <div class="TitleToDo">
-                            <p class="demo"></p>
-                        </div>
-                        <button class="active">done</button>
-                        <button class="delete">delete</button>
-                    </div>
-                    <div class="listItem border">
-                        <div class="TitleToDo">
-                            <p class="demo"></p>
-                        </div>
-                        <button class="active">done</button>
-                        <button class="delete">delete</button>
-                    </div>
-                    <div class="listItem border">
-                        <div class="TitleToDo">
-                            <p class="demo"></p>
-                        </div>
-                        <button class="active">done</button>
-                        <button class="delete">delete</button>
-                    </div>
+                    <?php
+                    foreach ($array as $item) {
+                    ?>
+                        <div class="listItem border">
+                            <div class="TitleToDo">
+                                <p class="demo"><?php echo $item['name'] ?></p>
+                            </div>
+                            <button class="active">done</button>
+                            <button class="delete">delete</button>
 
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
     </div>
-<script>
- fetch('https://jsonplaceholder.typicode.com/posts')
-  .then((response) => response.json())
-  .then((json) => myFunction(json));
-  function myFunction(arr){
-     text="";
-    for (i = 0; i < arr.length; i++) {
-  text = arr[i].title + "<br>";
-  document.getElementsByClassName("demo")[i].innerHTML=text;
-}
-
- }
- 
-</script>
-   
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var name = $_POST['API'];
+        var request = $.ajax({
+            method: "GET",
+            url: "header.php",
+            cache: false,
+            dataType: json,
+
+
+        });
+
+        $requestPost = $.ajax({
+
+            method: "POST",
+            url: "header.php",
+            cache: false,
+            data: {
+                name: name
+            },
+            dataType: json,
+        });
+    })
+</script>
 
 </html>
