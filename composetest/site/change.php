@@ -1,10 +1,11 @@
 <?php
 header('Content-type: application/json');
-$input = "tap the duc";
 session_start();
+$input = $_POST['arraVal'];
 foreach ($_SESSION['data'] as $key => $value) {
-    if ($value['name'] == $input) {
+    if ($value['status'] == $input) {
         if ($value['status'] == "done") {
+            echo "oke";
             $_SESSION['data'][$key]['status'] = "undone";
         } else {
             $_SESSION['data'][$key]['status'] = "done";

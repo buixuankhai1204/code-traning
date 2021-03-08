@@ -21,7 +21,7 @@ if (isset($_SESSION['data'])) {
         "success" => true,
         "status_code" => 200,
         "data" => $_SESSION['data'],
-        "message" => "tra ve du lieu thanh cong ",
+        "message" => "success",
         "error" => "",
     );
 } else {
@@ -30,7 +30,7 @@ if (isset($_SESSION['data'])) {
         "success" => true,
         "status_code" => 200,
         "data" => $array,
-        "message" => "tra ve du lieu thanh cong ",
+        "message" => "success",
         "error" => "",
     );
 };

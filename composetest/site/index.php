@@ -10,7 +10,7 @@
 
 
 <body>
-    
+
     <div id="wrapper">
         <p id="demo"></p>
         <header>
@@ -62,9 +62,9 @@
             </div>
             <div id="content">
                 <div class="form">
-                    <form action="http://localhost/code-traning/composetest/site/index.php" method="POST">
-                        <input id="nameItem" type="text" name="nameItem" value="<?php if (isset($_POST['nameItem'])) echo $_POST['nameItem'] ?>">
-                        <button type="submit" name="submit">submit</button>
+                    <form action="" method="POST">
+                        <input id="nameItem" type="text" name="nameItem" value="">
+                        <button type="submit" name="submit" id="submit">submit</button>
                     </form>
                 </div>
                 <div class="toDoList">
@@ -79,21 +79,26 @@
 <script>
     $(document).ready(function() {
         var result1 = "";
+        var btnIdDel = 0;
         $.ajax({
             type: "GET",
-            url: "http://localhost/code-traning/composetest/site/get.php",
+            url: "http://localhost:8081/get.php",
 
             contentType: "application/json",
             cache: false,
             dataType: "json",
             success: function(result) {
+
                 for (i = 0; i < result['data'].length; i++) {
-                    result1 += '<div class="listItem border">' +
+                    if(!( result['data'][i])){
+                            i++;
+                    }
+                    result1 +=  '<div class="listItem border">' +
                         '<div class="TitleToDo">' +
                         '<p class="demo">' + result['data'][i]['name'] + '</p>' +
                         '</div>' +
-                        '<button type="button" value="'+result['data'][i]['status']+'" id="active">' + 'done' + '</button>' +
-                        '<button type="button" id="'+'delete-'+ result['data'][i]['name'] +'">' + 'delete' + '</button>' +
+                        '<button type="button" value="' + result['data'][i]['status'] + '" id="active">' + 'done' + '</button>' +
+                        '<button type="button" value="' + i + '">' + 'delete' + '</button>' +
                         '</div>'
 
                 }
@@ -101,46 +106,69 @@
             }
         });
 
-        var nameItem = $("#nameItem").val();
-        var data = {
-            nameItem: nameItem
-        }
-        $.ajax({
-            type: "POST",
-            url: "http://localhost/code-traning/composetest/site/post.php",
-            contentType: "application/x-www-form-urlencoded",
-            data: data,
-            cache: false,
-            dataType: "json",
-            success: function(result) {
 
+        $("#submit").click(function() {
+            var nameItem = $("#nameItem").val();
+            var data = {
+                nameItem: nameItem
             }
-        });
-        // $("button").click(function() {
-        //     alert("The paragraph was clicked.");
+
             $.ajax({
                 type: "POST",
-                url: "http://localhost/code-traning/composetest/site/delete.php",
+                url: "http://localhost:8081/post.php",
                 contentType: "application/x-www-form-urlencoded",
                 data: data,
                 cache: false,
                 dataType: "json",
                 success: function(result) {
-
+                    if (result['status_code'] == 200) {
+                        location.reload();
+                    }
                 }
             });
+        });
+        $('.toDoList').on("click", 'button', function() {
+            abc = $(this).val();
+            var data = {
+                arraId: abc,
+            };
             $.ajax({
-                type: "PUT",
-                url: "http://localhost/code-traning/composetest/site/change.php",
+
+                type: "POST",
+                url: "http://localhost:8081/delete.php",
                 contentType: "application/x-www-form-urlencoded",
+                cache: true,
                 data: data,
-                cache: false,
                 dataType: "json",
                 success: function(result) {
+                    if (result['status_code'] == 200) {
+                        location.reload();
 
+                    }
                 }
             });
-        // });
+        });
+
+
+        $('.toDoList').on("click", '#active', function() {
+            abc = $(this).val();
+            var data = {
+                arraVal: abc,
+            };
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8081/change.php",
+                contentType: "application/x-www-form-urlencoded",
+                cache: false,
+                data: data,
+                dataType: "json",
+                success: function(result) {
+                    if (result['status_code'] == "200") {
+                        location.reload();
+                    }
+                }
+            });
+        });
     });
 </script>
 
