@@ -10,6 +10,7 @@
 
 
 <body>
+    
     <div id="wrapper">
         <p id="demo"></p>
         <header>
@@ -61,53 +62,86 @@
             </div>
             <div id="content">
                 <div class="form">
-                    <form action="http://localhost:8081/" method="POST">
-                        <input id="test" type="text" name="API" placeholder="nhap vao day">
+                    <form action="http://localhost/code-traning/composetest/site/index.php" method="POST">
+                        <input id="nameItem" type="text" name="nameItem" value="<?php if (isset($_POST['nameItem'])) echo $_POST['nameItem'] ?>">
                         <button type="submit" name="submit">submit</button>
                     </form>
                 </div>
                 <div class="toDoList">
-                    <?php
-                    foreach ($array as $item) {
-                    ?>
-                        <div class="listItem border">
-                            <div class="TitleToDo">
-                                <p class="demo"><?php echo $item['name'] ?></p>
-                            </div>
-                            <button class="active">done</button>
-                            <button class="delete">delete</button>
 
-                        </div>
-                    <?php } ?>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        var name = $_POST['API'];
-        var request = $.ajax({
-            method: "GET",
-            url: "header.php",
+        var result1 = "";
+        $.ajax({
+            type: "GET",
+            url: "http://localhost/code-traning/composetest/site/get.php",
+
+            contentType: "application/json",
             cache: false,
-            dataType: json,
+            dataType: "json",
+            success: function(result) {
+                for (i = 0; i < result['data'].length; i++) {
+                    result1 += '<div class="listItem border">' +
+                        '<div class="TitleToDo">' +
+                        '<p class="demo">' + result['data'][i]['name'] + '</p>' +
+                        '</div>' +
+                        '<button type="button" value="'+result['data'][i]['status']+'" id="active">' + 'done' + '</button>' +
+                        '<button type="button" id="'+'delete-'+ result['data'][i]['name'] +'">' + 'delete' + '</button>' +
+                        '</div>'
 
-
+                }
+                $(".toDoList").html(result1);
+            }
         });
 
-        $requestPost = $.ajax({
-
-            method: "POST",
-            url: "header.php",
+        var nameItem = $("#nameItem").val();
+        var data = {
+            nameItem: nameItem
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/code-traning/composetest/site/post.php",
+            contentType: "application/x-www-form-urlencoded",
+            data: data,
             cache: false,
-            data: {
-                name: name
-            },
-            dataType: json,
+            dataType: "json",
+            success: function(result) {
+
+            }
         });
-    })
+        // $("button").click(function() {
+        //     alert("The paragraph was clicked.");
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/code-traning/composetest/site/delete.php",
+                contentType: "application/x-www-form-urlencoded",
+                data: data,
+                cache: false,
+                dataType: "json",
+                success: function(result) {
+
+                }
+            });
+            $.ajax({
+                type: "PUT",
+                url: "http://localhost/code-traning/composetest/site/change.php",
+                contentType: "application/x-www-form-urlencoded",
+                data: data,
+                cache: false,
+                dataType: "json",
+                success: function(result) {
+
+                }
+            });
+        // });
+    });
 </script>
 
 </html>
