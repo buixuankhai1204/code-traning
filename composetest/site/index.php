@@ -10,7 +10,7 @@
 
 
 <body>
-
+    
     <div id="wrapper">
         <p id="demo"></p>
         <header>
@@ -90,10 +90,10 @@
             success: function(result) {
 
                 for (i = 0; i < result['data'].length; i++) {
-                    if(!( result['data'][i])){
-                            i++;
+                    if (!(result['data'][i])) {
+                        i++;
                     }
-                    result1 +=  '<div class="listItem border">' +
+                    result1 += '<div class="listItem border">' +
                         '<div class="TitleToDo">' +
                         '<p class="demo">' + result['data'][i]['name'] + '</p>' +
                         '</div>' +

@@ -1,6 +1,37 @@
 <?php
 
 header('Content-type: application/json');
+
+$userName = 'root';
+$database = "database";
+$passWord = 'root';
+$serverName = 'mariadb';
+$conn = mysqli_connect($serverName, $userName, $passWord, $database);
+// $query= "INSERT INTO Persons (PersonID, LastName,FirstName, Address, City)
+// VALUES (2,'Caaaardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger');";
+$query = "SELECT * FROM Persons";
+$result = mysqli_query($conn, $query);
+
+if ($result) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+$list = array();
+if(mysqli_num_rows($result)>0){
+    while ($row = mysqli_fetch_assoc($result));
+    $list[] = $row;
+}
+
+echo '<pre>';
+print_r($list);
+echo '</pre>';
+
+foreach ($list as $item) {
+    echo $item['FistName'];
+}
+
+
 $array = [
     [
         "id" => 1,
