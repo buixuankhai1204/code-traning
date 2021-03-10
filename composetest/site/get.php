@@ -19,7 +19,7 @@ if ($result) {
 }
 $list = array();
 if(mysqli_num_rows($result)>0){
-    while ($row = mysqli_fetch_assoc($result));
+    while ($row = db_fetch_array($result));
     $list[] = $row;
 }
 
@@ -30,7 +30,6 @@ echo '</pre>';
 foreach ($list as $item) {
     echo $item['FistName'];
 }
-
 
 $array = [
     [

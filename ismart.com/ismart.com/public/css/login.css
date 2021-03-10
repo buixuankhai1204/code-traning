@@ -1,0 +1,57 @@
+body {
+    background-color: #4db2ec;
+    display: inline-block;
+    position: relative;
+}
+
+#content {
+    width: 200px;
+    display: inline-block;
+    background-color: white;
+    padding: 20px 40px;
+    text-align: center;
+    position: absolute;
+    top: 200px;
+    left: 600px;
+    line-height: 23px;
+}
+
+form {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+#username,
+#password,
+#email,
+#fullname {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    padding: 8px 0px;
+    margin: 8px 0px;
+    margin: 10px 0px;
+    background-color: lightgoldenrodyellow;
+}
+
+#reg {
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0px;
+    padding: 10px 0px;
+    border: none;
+    background-color: #4db2ec;
+}
+
+.forget_password a {
+    padding: 10px 0px;
+    color: #4db2ec;
+}
+
+#wrapper p {
+    text-align: justify!important;
+}
