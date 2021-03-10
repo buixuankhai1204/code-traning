@@ -1,17 +1,17 @@
 <?php
 header('Content-type: application/json');
 session_start();
-$input = $_POST['arraVal'];
-foreach ($_SESSION['data'] as $key => $value) {
-    if ($value['status'] == $input) {
-        if ($value['status'] == "done") {
-            echo "oke";
-            $_SESSION['data'][$key]['status'] = "undone";
-        } else {
-            $_SESSION['data'][$key]['status'] = "done";
+include 'connect.php';
 
-        }
-    }
+$inputStatus = $_POST['arraStatus'];
+$inputId = $_POST['arraId'];
+
+if ($inputStatus == '0') {
+    $query0 = "UPDATE user SET flagStatus=1 WHERE intId='$inputId'";
+    $result = mysqli_query($conn, $query0);
+} else {
+    $query1 = "UPDATE user SET flagStatus=0 WHERE intId='$inputId'";
+    $result = mysqli_query($conn, $query1);
 }
 $array_respone = [
     "success" => false,

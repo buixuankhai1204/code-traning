@@ -1,13 +1,10 @@
 <?php
 header('Content-type: application/json');
+include 'connect.php';
+
 $input=$_POST['arraId'];
-session_start();
-foreach($_SESSION['data'] as $key => $value){
-    if($key==$input){
-        unset($_SESSION['data'][$key]);
-        $_SESSION['data']= array_values($_SESSION['data']);
-    }
-}
+$query = "DELETE FROM user WHERE intId='$input'";
+$result = mysqli_query($conn, $query);
 
 $array_respone = [
     "success" => true,
