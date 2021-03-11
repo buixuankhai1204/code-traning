@@ -1,7 +1,6 @@
 <?php
 
 header('Content-type: application/json');
-
 include 'connect.php';
 $query = "SELECT * FROM user";
 $result = mysqli_query($conn, $query);

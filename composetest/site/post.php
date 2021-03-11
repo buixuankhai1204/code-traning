@@ -1,7 +1,7 @@
 <?php
 header('Content-type: application/json');
 include 'connect.php';
-$input = (string)$_POST['nameItem'];
+$input = $_POST['nameItem'];
 if ($input == "") {
     $array_respone = [
         "success" => false,
@@ -10,7 +10,6 @@ if ($input == "") {
         "error" => "lay du lieu khong lieu thanh cong",
     ];
 echo json_encode($array_respone);
-exit;
 }
 $query = "INSERT INTO user (strTitle, flagStatus) VALUES ('$input', 1 )";
 $result = mysqli_query($conn, $query);
