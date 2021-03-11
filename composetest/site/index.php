@@ -11,7 +11,7 @@
 
 
 <body>
-
+<?php phpinfo() ;exit ?>
     <div id="wrapper">
         <p id="demo"></p>
         <header>
