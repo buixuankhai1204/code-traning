@@ -11,7 +11,7 @@
 
 
 <body>
-<?php ?>
+    <?php  ?>
     <div id="wrapper">
         <p id="demo"></p>
         <header>
@@ -68,7 +68,7 @@
                         <button type="submit" name="submit" id="submit">submit</button>
                     </form>
                 </div>
-                <div class="toDoList">
+                <div class="toDoList toDoList1">
 
                 </div>
             </div>
@@ -84,8 +84,6 @@
         type: "GET",
         url: "http://localhost:8081/get.php",
 
-        contentType: "application/json",
-        cache: false,
         dataType: "json",
         success: function(result) {
 
@@ -97,8 +95,8 @@
                     '<div class="TitleToDo">' +
                     '<p class="demo">' + result['data'][i]['strTitle'] + '</p>' +
                     '</div>' +
-                    '<button  class="active" value="' + result['data'][i]['1'] + '" id="' + result['data'][i]['intId'] + '">' + result['data'][i]['flagStatus'] + '</button>' +
-                    '<button type="button" value="' + result['data'][i]['intId'] + '">' + 'delete' + '</button>' +
+                    '<button  class="active" value="' + result['data'][i]['flagStatus'] + '" id="' + result['data'][i]['intId'] + '">' + result['data'][i]['flagStatus'] + '</button>' +
+                    '<button type="button" class="delete" value="' + result['data'][i]['intId'] + '">' + 'delete' + '</button>' +
                     '</div>'
 
             }
@@ -125,20 +123,44 @@
         $.ajax({
             type: "POST",
             url: "http://localhost:8081/post.php",
-            contentType: "application/x-www-form-urlencoded",
             data: data,
-            cache: false,
             dataType: "json",
             success: function(result) {
+                if (result['status_code'] == 200) {
+                    for (i = 0; i < result['data'].length; i++) {
+                        if (!(result['data'][i])) {
+                            i++;
+                        }
+                        result1 += '<div class="listItem border">' +
+                            '<div class="TitleToDo">' +
+                            '<p class="demo">' + result['data'][i]['strTitle'] + '</p>' +
+                            '</div>' +
+                            '<button  class="active" value="' + result['data'][i]['flagStatus'] + '" id="' + result['data'][i]['intId'] + '">' + result['data'][i]['flagStatus'] + '</button>' +
+                            '<button type="button" class="delete" value="' + result['data'][i]['intId'] + '">' + 'delete' + '</button>' +
+                            '</div>'
 
+                    }
+                    $(".toDoList").html(result1);
+                    var arrayBtn = $(".active");
+                    $.each(arrayBtn, function(index, item) {
+                        if ($(item).text() == 1) {
+                            $("button:contains(1)").text("done");
+                        } else {
+                            $("button:contains(0)").text("undone");
+
+                        }
+
+                    });
+                }
             }
         });
     });
-    $('.toDoList').on("click", 'button', function() {
+    $('.toDoList').on("click", '.delete', function() {
         abc = $(this).val();
         var data = {
             arraId: abc,
         };
+        var result1 = "";
         $.ajax({
 
             type: "POST",
@@ -149,7 +171,31 @@
             dataType: "json",
             success: function(result) {
                 if (result['status_code'] == 200) {
-                    location.reload();
+                    for (i = 0; i < result['data'].length; i++) {
+                        if (!(result['data'][i])) {
+                            i++;
+                        }
+                        result1 += '<div class="listItem border">' +
+                            '<div class="TitleToDo">' +
+                            '<p class="demo">' + result['data'][i]['strTitle'] + '</p>' +
+                            '</div>' +
+                            '<button  class="active" value="' + result['data'][i]['flagStatus'] + '" id="' + result['data'][i]['intId'] + '">' + result['data'][i]['flagStatus'] + '</button>' +
+                            '<button type="button" class="delete" value="' + result['data'][i]['intId'] + '">' + 'delete' + '</button>' +
+                            '</div>'
+
+                    }
+                    $(".toDoList").html(result1);
+                    var arrayBtn = $(".active");
+                    $.each(arrayBtn, function(index, item) {
+                        if ($(item).text() == 1) {
+                            $("button:contains(1)").text("done");
+                        } else {
+                            $("button:contains(0)").text("undone");
+
+                        }
+
+                    });
+
                 }
             }
         });
@@ -157,10 +203,11 @@
 
 
     $('.toDoList').on("click", '.active', function() {
+        var result1 = "";
         status = $(this).val();
         id = $(this).attr('id');
         var data = {
-            arraStatus: abc,
+            arraStatus: status,
             arraId: id,
         };
         $.ajax({
@@ -172,8 +219,30 @@
             dataType: "json",
             success: function(result) {
                 if (result['status_code'] == "200") {
+                    for (i = 0; i < result['data'].length; i++) {
+                        if (!(result['data'][i])) {
+                            i++;
+                        }
+                        result1 += '<div class="listItem border">' +
+                            '<div class="TitleToDo">' +
+                            '<p class="demo">' + result['data'][i]['strTitle'] + '</p>' +
+                            '</div>' +
+                            '<button  class="active" value="' + result['data'][i]['flagStatus'] + '" id="' + result['data'][i]['intId'] + '">' + result['data'][i]['flagStatus'] + '</button>' +
+                            '<button type="button" class="delete" value="' + result['data'][i]['intId'] + '">' + 'delete' + '</button>' +
+                            '</div>'
 
-                    location.reload();
+                    }
+                    $(".toDoList").html(result1);
+                    var arrayBtn = $(".active");
+                    $.each(arrayBtn, function(index, item) {
+                        if ($(item).text() == 1) {
+                            $("button:contains(1)").text("done");
+                        } else {
+                            $("button:contains(0)").text("undone");
+
+                        }
+
+                    });
                 }
             }
         });
